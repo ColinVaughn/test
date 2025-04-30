@@ -19,4 +19,21 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        customize: path.resolve(__dirname, 'index.html'),
+        prebuilt: path.resolve(__dirname, 'index.html'),
+        'gaming-pcs': path.resolve(__dirname, 'index.html'),
+        workstations: path.resolve(__dirname, 'index.html'),
+        about: path.resolve(__dirname, 'index.html'),
+        support: path.resolve(__dirname, 'index.html'),
+      },
+      output: {
+        dir: 'dist',
+      },
+    },
+  },
 }));
