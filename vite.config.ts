@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import { copy } from 'vite-plugin-static-copy';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -13,6 +14,11 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' &&
     componentTagger(),
+    copy({
+      targets: [
+        { src: 'public/*', dest: 'dist' },
+      ],
+    }),
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -21,18 +27,16 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: true,
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
-        customize: path.resolve(__dirname, 'index.html'),
-        prebuilt: path.resolve(__dirname, 'index.html'),
-        'gaming-pcs': path.resolve(__dirname, 'index.html'),
-        workstations: path.resolve(__dirname, 'index.html'),
-        about: path.resolve(__dirname, 'index.html'),
-        support: path.resolve(__dirname, 'index.html'),
       },
       output: {
-        dir: 'dist',
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash][extname]',
       },
     },
   },
