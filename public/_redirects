@@ -1,0 +1,23 @@
+
+# Netlify redirects file
+
+# Force HTTPS
+http://battleforgepc.com/* https://www.battleforgepc.com/:splat 301!
+http://www.battleforgepc.com/* https://www.battleforgepc.com/:splat 301!
+
+# Redirect non-www to www
+https://battleforgepc.com/* https://www.battleforgepc.com/:splat 301!
+
+# Handle legacy URLs and common misspellings
+/customise /customize 301
+/gaming /gaming-pcs 301
+/prebuilds /prebuilt 301
+/custom /customize 301
+/workstation /workstations 301
+/about-us /about 301
+
+# Specific redirects for checkout paths
+/checkout/cancelled /cancelled 301
+
+# Ensure all pages are served through the SPA
+/* /index.html 200
